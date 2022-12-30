@@ -8,4 +8,12 @@ module.exports = {
   singleQuote: false,
   printWidth: 80,
   tabWidth: 2,
+  insertPragma: false,
+  jsxSingleQuote: false,
+  proseWrap: "always",
+  quoteProps: "as-needed",
+  requirePragma: false,
+  useTabs: false,
+  vueIndentScriptAndStyle: false,
+  embeddedLanguageFormatting: "off",
 };

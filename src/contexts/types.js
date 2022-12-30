@@ -1,0 +1,23 @@
+export const DATA_LOADING = "DATA_LOADING";
+export const DATA_SUCCESS = "DATA_SUCCESS";
+export const API_ERROR = "API_ERROR";
+
+export const FILMS_LOADING = "FILMS_LOADING";
+export const FILMS_SUCCESS = "FILMS_SUCCESS";
+export const FILMS_ERROR = "FILMS_ERROR";
+
+export const SPECIES_LOADING = "SPECIES_LOADING";
+export const SPECIES_SUCCESS = "SPECIES_SUCCESS";
+export const SPECIES_ERROR = "SPECIES_ERROR";
+
+export const SEARCH_CHARACTERS = "SEARCH_CHARACTERS";
+export const CLEAR_SEARCH = "CLEAR_SEARCH";
+
+export const LOAD_FILTER = "LOAD_FILTER";
+export const UPDATE_FILTER = "UPDATE_FILTER";
+export const FILTER_CHARACTERS = "FILTER_CHARACTERS";
+export const CLEAR_FILTERS = "CLEAR_FILTERS";
+
+// export const ADD_FILTER = "ADD_FILTER";
+// export const REMOVE_FILTER = "REMOVE_FILTER";
+// export const REMOVE_ALL = "REMOVE_ALL";
