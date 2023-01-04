@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import "./styles.css";
 import P from "prop-types";
-import { useFilterContext } from "../../contexts/FilterProvider";
-import { useDataContext } from "../../contexts";
+import { useFilterContext } from "../../contexts/FilterProvider/FilterProvider";
+import { useDataContext } from "../../contexts/CharactersProvider/CharactersProvider";
+import { Link } from "react-router-dom";
 
 const Pagination = ({ perPage, setCurrentPage, currentPage }) => {
   const { filter_character } = useFilterContext();
@@ -29,31 +30,35 @@ const Pagination = ({ perPage, setCurrentPage, currentPage }) => {
   }, [filter_character]);
 
   return (
-    <div className="pagination-container">
+    <nav
+      role="navigation"
+      aria-label="Pagination"
+      className="pagination-container"
+    >
       <ul className="pagination">
         <li className="page-item">
-          <a href="#" onClick={previousPage}>
-            Prev
-          </a>
+          <Link onClick={previousPage}>◂ Prev</Link>
         </li>
         {pages.map((page) => (
-          <li key={page} className="page-item">
-            <a
-              href="#"
-              className="page-link"
+          <li
+            key={page}
+            aria-label={`Current Page ${page}`}
+            aria-current="true"
+            className="page-item"
+          >
+            <Link
+              className={`${currentPage === page ? "active" : ""}`}
               onClick={() => setCurrentPage(page)}
             >
               {`${page}`}
-            </a>
+            </Link>
           </li>
         ))}
         <li className="page-item">
-          <a href="#" onClick={nextPage}>
-            Next
-          </a>
+          <Link onClick={nextPage}>Next ▸</Link>
         </li>
       </ul>
-    </div>
+    </nav>
   );
 };
 

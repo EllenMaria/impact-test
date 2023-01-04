@@ -1,12 +1,18 @@
 import P from "prop-types";
 import { useEffect, useReducer, useRef, useContext } from "react";
-import { loadData, loadFilms, loadSpecies } from "./actions";
+import {
+  loadData,
+  loadFilms,
+  loadSpecies,
+  loadVehicles,
+  loadStarships,
+} from "./actions";
 import { CharactersContext } from "./context";
 import { data } from "./data";
 import { reducer } from "./reducer";
 import * as types from "./types";
 
-export const DataProvider = ({ children }) => {
+export const CharactersProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, data);
 
   const searchCharacters = (text) => {
@@ -54,6 +60,30 @@ export const DataProvider = ({ children }) => {
     };
   }, [dispatch]);
 
+  useEffect(() => {
+    loadVehicles(dispatch).then((dispatch) => {
+      if (isMounted.current) {
+        dispatch();
+      }
+    });
+
+    return () => {
+      isMounted.current = false;
+    };
+  }, [dispatch]);
+
+  useEffect(() => {
+    loadStarships(dispatch).then((dispatch) => {
+      if (isMounted.current) {
+        dispatch();
+      }
+    });
+
+    return () => {
+      isMounted.current = false;
+    };
+  }, [dispatch]);
+
   return (
     <CharactersContext.Provider
       value={{
@@ -71,6 +101,6 @@ export const useDataContext = () => {
   return useContext(CharactersContext);
 };
 
-DataProvider.propTypes = {
+CharactersProvider.propTypes = {
   children: P.node.isRequired,
 };

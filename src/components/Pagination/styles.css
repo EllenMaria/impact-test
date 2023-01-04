@@ -23,7 +23,6 @@ a {
 }
 
 .active {
-  background-color: yellow;
-  color: black;
-  padding: .2em .5em;
+  color: #FFC500;
+  font-weight: bold;
 }

@@ -1,12 +1,12 @@
-import { useState } from "react";
-import { useDataContext } from "../../contexts";
-import { useFilterContext } from "../../contexts/FilterProvider";
-import Dropdown from "../Dropdown";
+import { useState, useCallback } from "react";
+import { useDataContext } from "../../contexts/CharactersProvider/CharactersProvider";
+import { useFilterContext } from "../../contexts/FilterProvider/FilterProvider";
 import Loading from "../Loading";
 import Pagination from "../Pagination";
 import Search from "../Search";
+import Select from "../Select";
 import CardData from "./CardData";
-import { Cards } from "./styles";
+import { Cards, SelectContainer } from "./styles";
 
 const Characters = () => {
   const {
@@ -19,31 +19,22 @@ const Characters = () => {
   } = useDataContext();
   const [query, setQuery] = useState("");
 
-  const {
-    filters: { gender, species, films },
-    updateFilterValue,
-    filter_character,
-    clearFilters,
-    all_characters,
-  } = useFilterContext();
+  const { filter_character, clearFilters, updateFilterValue, all_characters } =
+    useFilterContext();
 
   const getUniqueData = (data, attr) => {
     let newVal = data.map((curElem) => {
       return curElem[attr];
     });
 
-    // if (attr === "films" || attr === "title") {
-    //   newVal = newVal.flat();
-    // }
-
-    return (newVal = ["all", ...new Set(newVal)]);
+    return [`all`, ...new Set(newVal)];
   };
 
   const genderData = getUniqueData(all_characters, "gender");
   const filmData = getUniqueData(filmsData, "url");
   const specieData = getUniqueData(speciesData, "url");
 
-  const handleChange = (e) => {
+  const handleChange = useCallback((e) => {
     const { value } = e.target;
     setQuery(value);
     if (query !== "") {
@@ -51,12 +42,9 @@ const Characters = () => {
     } else {
       clearSearch();
     }
-  };
+  }, []);
 
-  const [perPage] = useState(10);
-
-  // const numOfTotalPages = Math.ceil(characters.length / perPage);
-  // const pages = [...Array(numOfTotalPages + 1).keys()].slice(1);
+  const [perPage] = useState(9);
   const [currentPage, setCurrentPage] = useState(1);
   const indexOfLastCharacter = currentPage * perPage;
   const indexOfFirstCharacter = indexOfLastCharacter - perPage;
@@ -72,11 +60,6 @@ const Characters = () => {
       })
     : visibleCharacter;
 
-  const genders = ["male", "female", "n/a", "all genders"];
-
-  const [open, setOpen] = useState(false);
-  const [selectDemoValue, setSelectDemoValue] = useState("all genders");
-
   if (loading && isFilmLoading) {
     return <Loading />;
   }
@@ -86,69 +69,59 @@ const Characters = () => {
       <h1>Characters</h1>
       <Search handleChange={handleChange} search={query} />
 
-      <Dropdown
-        open={open}
-        setOpen={setOpen}
-        selectDemoValue={selectDemoValue}
-        setSelectDemoValue={setSelectDemoValue}
-        genders={genders}
-      />
-      <div className="filter-category">
-        <h3>Gender</h3>
-        <form action="#">
-          <select name="gender" id={gender} onClick={updateFilterValue}>
-            {genderData.map((curElem, index) => {
-              return (
-                <option key={index} value={curElem} name="gender">
-                  {curElem}
-                </option>
-              );
-            })}
-          </select>
-        </form>
-      </div>
-      <div className="filter-category">
-        <h3>Films</h3>
-        <form action="#" className={films}>
-          <select name="films" id="films" onClick={updateFilterValue}>
-            {filmData.map((curElem, index) => {
-              return (
-                <option key={index} value={curElem} name="films">
-                  {curElem === "all"
-                    ? "all films"
-                    : filmsData.map((f) => (f.url === curElem ? f.title : ""))}
-                </option>
-              );
-            })}
-          </select>
-        </form>
-      </div>
-      <div className="filter-category">
-        <h3>Species</h3>
-        <form action="#" className={species}>
-          <select name="species" id="species" onClick={updateFilterValue}>
-            {specieData.map((curElem, index) => {
-              return (
-                <option key={index} value={curElem} name="species">
-                  {curElem}
-                </option>
-              );
-            })}
-          </select>
-        </form>
-      </div>
+      <SelectContainer>
+        <p>Filter by</p>
+
+        <Select
+          updateFilterValue={updateFilterValue}
+          filterData={genderData}
+          dataName="genders"
+          borderColor={"#FF8989"}
+        />
+
+        <Select
+          updateFilterValue={updateFilterValue}
+          filterData={filmData}
+          filterName={filmsData}
+          dataName="films"
+          borderColor={"#45C1FF"}
+        />
+
+        <Select
+          updateFilterValue={updateFilterValue}
+          filterData={specieData}
+          filterName={speciesData}
+          dataName="species"
+          borderColor={"#57FF86"}
+        />
+      </SelectContainer>
+
       <button onClick={clearFilters}>Clear Filters</button>
+
+      <div>
+        {!query && (
+          <p>
+            Showing {visibleCharacter.length} of {filter_character.length}{" "}
+            characters
+          </p>
+        )}
+      </div>
+
       <Cards>
         {filtered.map((character) => (
           <CardData key={character.name} character={character} />
         ))}
         {filtered.length === 0 && <p>Tem nada aqui vai circulando!</p>}
       </Cards>
-      <Pagination
-        perPage={perPage}
-        setCurrentPage={setCurrentPage}
-        currentPage={currentPage}
-      />
+      <div>
+        {!query && (
+          <Pagination
+            perPage={perPage}
+            setCurrentPage={setCurrentPage}
+            currentPage={currentPage}
+          />
+        )}
+      </div>
     </div>
   );
 };

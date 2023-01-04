@@ -11,12 +11,9 @@ export const GlobalStyles = createGlobalStyle`
       background: ${theme.colors.darkColor};
       color: ${theme.colors.lightColor};
       font-family: ${theme.fonts.primaryFont};
-    `}
-  }
-  h1 {
-    ${({ theme }) => css`
-      color: ${theme.colors.accentColor};
-      text-align: center;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 2em;
     `}
   }
 `;

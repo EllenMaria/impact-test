@@ -2,7 +2,7 @@ import P from "prop-types";
 import { useContext, useEffect, useReducer } from "react";
 import { FilterContext } from "./context";
 import { filters } from "./data";
-import { useDataContext } from "./DataProvider";
+import { useDataContext } from "../CharactersProvider/CharactersProvider";
 import { reducer } from "./reducer";
 import * as types from "./types";
 

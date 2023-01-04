@@ -7,7 +7,7 @@ export const theme = {
     darkColor: "#303236",
   },
   fonts: {
-    primaryFont: "Arial, sans-serif",
+    primaryFont: "Cabin, sans-serif",
   },
   spacintgs: {},
 };

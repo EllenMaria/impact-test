@@ -143,3 +143,8 @@
   box-sizing: border-box;
   border: 1px solid transparent;
 }
+
+
+.App {
+  margin-left: 10em;
+}

@@ -1,20 +1,24 @@
+import * as Select from "@radix-ui/react-select";
 import {
   CheckIcon,
   ChevronDownIcon,
   ChevronUpIcon,
 } from "@radix-ui/react-icons";
-import * as Select from "@radix-ui/react-select";
+// import { useState } from "react";
+// import * as Select from "@radix-ui/react-select";
 import P from "prop-types";
+import { useState } from "react";
 import "./styles.css";
 
-export const Dropdown = ({ setSelectDemoValue, selectDemoValue, genders }) => {
+export const Dropdown = () => {
+  const genders = ["female", "male", "n/a", "all genders"];
+  const [selectDemoValue, setSelectDemoValue] = useState("all genders");
+
   return (
     <div className="App">
       <Select.Root value={selectDemoValue} onValueChange={setSelectDemoValue}>
         <Select.Trigger className="SelectTrigger" id="sampleSelectMenu">
-          <Select.Value aria-label={selectDemoValue}>
-            {genders[selectDemoValue]}
-          </Select.Value>
+          <Select.Value aria-label={selectDemoValue}></Select.Value>
           <Select.Icon>
             <ChevronDownIcon className="ChevronIcon" />
           </Select.Icon>

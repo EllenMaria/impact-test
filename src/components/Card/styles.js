@@ -1,80 +1,139 @@
 import styled from "styled-components";
 
 export const Cards = styled.div`
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(auto, 230px));
-    gap: 4rem;
-    place-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(auto, 260px));
+  gap: 5em;
+  place-content: center;
 `;
+
+export const HeaderCard = styled.header`
+`;
+
+export const SeeMoreButton = styled.button`
+  font-family: inherit;
+  font-weight: 700;
+  font-size: .75rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  transform: translate(-50%, 125%);
+  width: 40%;
+  border-radius: 1rem;
+  border: none;
+  background-color: #FFC500;
+  color: #252629;
+  padding: .5em;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  opacity: 0;
+  transition: 0.3s ease-out;
+  `;
 
 export const CardContainer = styled.div`
-  position: relative;
-  &:nth-child(odd)&:before {
-    content: "";
-    background-color: #00fffb4c;
-    position: absolute;
-
-    border-radius: 50%;
-    width: 6rem;
-    height: 6rem;
-    top: 30%;
-    right: 7%;
-  }
-  &:nth-child(even)&:before {
-    content: "";
-    background-color: #ff00004c;
-    position: absolute;
-
-    border-radius: 50%;
-    width: 6rem;
-    height: 6rem;
-    top: 30%;
-    right: 7%;
-  }
-`;
-
-export const CardBox = styled.div`
-    width: 11.875em;
-    min-height: 15.875em;
-    padding: 1rem;
-    background-color: rgba(255, 255, 255, 0.074);
-    border: 1px solid rgba(255, 255, 255, 0.222);
+    background-color: #252629;
+    border: 1px solid white;
     cursor: pointer;
-    -webkit-backdrop-filter: blur(20px);
-    backdrop-filter: blur(20px);
-    border-radius: .7rem;
-    -webkit-transition: all ease .3s;
-    transition: all ease .3s;
+    width: 250px;
+    padding: 1.5em 2em;
+    box-shadow: 0px 4px 4px rgba(78, 78, 78, 0.25);
+    border-radius: 10px;
+    margin: 0 auto;
+    position: relative;
+    transition:  0.5s ease-out;
+    overflow: visible;
 
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-
-    &:nth-child(odd)&:hover {
+    &:hover {
+      border-color: #FFC500;
       -webkit-box-shadow: 0px 0px 20px 1px #ffbb763f;
       box-shadow: 0px 0px 20px 1px #ffbb763f;
-  }
-    &:nth-child(even)&:hover {
-      -webkit-box-shadow: 0px 0px 20px 1px #000;
-      box-shadow: 0px 0px 20px 1px #000 !important;
-  }
+    }
+
+    &:hover ${SeeMoreButton} {
+      transform: translate(-50%, 50%);
+      opacity: 1;
+    }
+  `;
+
+export const CardBox = styled.div`
+  min-height: 20em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+export const CardFilmsBox = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+`;
+
+export const CardFilmsContainer = styled.div`
+  text-align: start;
+`;
+
+export const SmallTitleDetail = styled.p`
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-weight: 700;
+  font-size: .75rem;
+`;
+
+export const SmallTextDetail = styled.p`
+  text-transform: capitalize;
+  font-weight: 400;
+  font-size: .75rem;
 `;
 
 export const CardFilms = styled.p`
-  font-size: .8em;
-  font-weight: 300;
-  letter-spacing: .1em;
+  margin-top: 5px;
+  margin-right: 5px;
+  background-color: ${(props) => props.cor};
+  font-size: .75rem;
+  border-radius: 50px;
+  padding: .2em .7em;
 `;
 
-export const CardTitle = styled.span`
-    font-size: 2rem;
-    font-weight: 500;
-    letter-spacing: .1em
+export const CardTitle = styled.h2`
+  color:#FFC500;
+  font-weight: 700;
+  text-align: center;
+`;
+
+export const InfoDetails = styled.div`
+  display: flex;
+  gap: 1em;
+  text-align: center;
+  place-content: center;
+  margin-top: .8em;
+  opacity: ${(props) => (props.open ? 1 : 0)};
+  transition: all .5s ease-in-out;
+  /* padding-bottom: ${(props) => (props.open ? "10px" : "")}; */
+`;
+
+export const MoreInfoDetails = styled.div`
+  display: flex;
+  gap: 1em;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const MoreInfoBox = styled.div`
+  width: 80px;
+  height: 80px;
+  border-radius: 50px;
+  background-color: #C4C8CA;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const SelectContainer = styled.div`
+  display: flex;
+  gap: 1em;
+  padding: 1em 0;
+  align-items: center;
+  color: #C4C8CA;
 `;

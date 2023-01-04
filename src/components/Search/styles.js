@@ -4,13 +4,13 @@ export const InputSearch = styled.input`
   border: 2px solid transparent;
   outline: none;
   caret-color: #C4C8CA;
-  transition: .5s linear;
   letter-spacing: 1px;
   background: #535760;
   border-radius: 8px;
   height: 38px;
-  padding: 1em;
+  padding-left: 2.5rem;
   color: #C4C8CA;
+  width: 100%;
 
   &:focus {
     border: 1px solid #C4C8CA;
@@ -21,10 +21,4 @@ export const InputSearch = styled.input`
   &::placeholder {
     color: #C4C8CA;
   }
-`;
-
-export const GridContainer = styled.div`
-  max-width: 1080px;
-  display: grid;
-  margin: 2em auto;
 `;

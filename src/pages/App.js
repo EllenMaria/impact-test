@@ -1,21 +1,23 @@
-import * as Styled from "../styles";
-// import Heading from "../components/Heading";
 import Characters from "../components/Card";
-import { DataProvider } from "../contexts";
-import { FilterProvider } from "../contexts/FilterProvider";
+import { CharactersProvider } from "../contexts/CharactersProvider/CharactersProvider";
+import { FilterProvider } from "../contexts/FilterProvider/FilterProvider";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import DetailPage from "./DetailPage";
+import PageNotFound from "./PageNotFound";
 
 function App() {
   return (
-    <div className="App">
-      <Styled.Wrapper>
-        {/* <Heading light={true}>Olá</Heading> */}
-        <DataProvider>
-          <FilterProvider>
-            <Characters />
-          </FilterProvider>
-        </DataProvider>
-      </Styled.Wrapper>
-    </div>
+    <CharactersProvider>
+      <FilterProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Characters />} />
+            <Route path="character/:name" element={<DetailPage />} />
+            <Route path="*" element={<PageNotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </FilterProvider>
+    </CharactersProvider>
   );
 }
 
