@@ -7,16 +7,11 @@ import { Card, Loading, Pagination, Search, Select } from "../../components";
 import { Cards, ClearButton, SelectContainer } from "./styles";
 import { Heading } from "../../components/Heading/styles";
 import { AnimatePresence } from "framer-motion";
+import BackToTopButton from "../../components/BackToTop";
 
 const Characters = () => {
-  const {
-    loading,
-    isFilmLoading,
-    searchCharacters,
-    clearSearch,
-    filmsData,
-    speciesData,
-  } = useDataContext();
+  const { loading, searchCharacters, clearSearch, filmsData, speciesData } =
+    useDataContext();
   const [query, setQuery] = useState("");
 
   const { filter_character, clearFilters, updateFilterValue, all_characters } =
@@ -47,7 +42,7 @@ const Characters = () => {
     [clearSearch, query, searchCharacters],
   );
 
-  const [perPage] = useState(9);
+  const [perPage] = useState(18);
   const [currentPage, setCurrentPage] = useState(1);
   const indexOfLastCharacter = currentPage * perPage;
   const indexOfFirstCharacter = indexOfLastCharacter - perPage;
@@ -63,9 +58,14 @@ const Characters = () => {
       })
     : visibleCharacter;
 
-  if (loading && isFilmLoading) {
+  if (loading) {
     return <Loading></Loading>;
   }
+
+  const clearF = () => {
+    clearFilters();
+    if (filter_character.length !== 87) setCurrentPage(1);
+  };
 
   return (
     <div>
@@ -109,7 +109,7 @@ const Characters = () => {
         />
       </SelectContainer>
 
-      <ClearButton onClick={clearFilters}>Clear Filters</ClearButton>
+      <ClearButton onClick={clearF}>Clear Filters</ClearButton>
 
       <div>
         {!query && (
@@ -125,9 +125,10 @@ const Characters = () => {
           {filtered.map((character) => (
             <Card key={character.name} character={character} query={query} />
           ))}
-          {filtered.length === 0 && <p>Tem nada aqui vai circulando!</p>}
+          {filtered.length === 0 && <Loading></Loading>}
         </AnimatePresence>
       </Cards>
+      <BackToTopButton />
       <div>
         {!query && (
           <Pagination
