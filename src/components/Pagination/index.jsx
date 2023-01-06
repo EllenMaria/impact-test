@@ -20,12 +20,14 @@ export const Pagination = ({ perPage, setCurrentPage, currentPage }) => {
     if (currentPage !== numOfTotalPages) setCurrentPage(currentPage + 1);
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const redirecToFirstPage = () => {
     if (filter_character.length !== characters.length) setCurrentPage(1);
   };
 
   useEffect(() => {
     redirecToFirstPage();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filter_character]);
 
   return (

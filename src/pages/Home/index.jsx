@@ -6,8 +6,6 @@ import { Card, Loading, Pagination, Search, Select } from "../../components";
 
 import { Cards, ClearButton, SelectContainer } from "./styles";
 import { Heading } from "../../components/Heading/styles";
-// import { Loader } from "../../components/Loading/styles";
-// import { motion } from "framer-motion";
 import { AnimatePresence } from "framer-motion";
 
 const Characters = () => {
@@ -36,15 +34,18 @@ const Characters = () => {
   const filmData = getUniqueData(filmsData, "url");
   const specieData = getUniqueData(speciesData, "url");
 
-  const handleChange = useCallback((e) => {
-    const { value } = e.target;
-    setQuery(value);
-    if (query !== "") {
-      searchCharacters(query);
-    } else {
-      clearSearch();
-    }
-  }, []);
+  const handleChange = useCallback(
+    (e) => {
+      const { value } = e.target;
+      setQuery(value);
+      if (query !== "") {
+        searchCharacters(query);
+      } else {
+        clearSearch();
+      }
+    },
+    [clearSearch, query, searchCharacters],
+  );
 
   const [perPage] = useState(9);
   const [currentPage, setCurrentPage] = useState(1);
