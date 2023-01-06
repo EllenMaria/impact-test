@@ -1,8 +1,7 @@
-import Characters from "../components/Card";
-import { CharactersProvider } from "../contexts/CharactersProvider/CharactersProvider";
-import { FilterProvider } from "../contexts/FilterProvider/FilterProvider";
+import Characters from "./Home";
+import { CharactersProvider, FilterProvider } from "../contexts";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import DetailPage from "./DetailPage";
+import DetailPage from "./Detail";
 import PageNotFound from "./PageNotFound";
 
 function App() {

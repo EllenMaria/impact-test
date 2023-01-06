@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
 import "./styles.css";
 import P from "prop-types";
-import { useFilterContext } from "../../contexts/FilterProvider/FilterProvider";
-import { useDataContext } from "../../contexts/CharactersProvider/CharactersProvider";
+import { useDataContext, useFilterContext } from "../../contexts";
 import { Link } from "react-router-dom";
 
-const Pagination = ({ perPage, setCurrentPage, currentPage }) => {
+export const Pagination = ({ perPage, setCurrentPage, currentPage }) => {
   const { filter_character } = useFilterContext();
   const { characters } = useDataContext();
 
@@ -67,5 +66,3 @@ Pagination.propTypes = {
   setCurrentPage: P.func,
   currentPage: P.number,
 };
-
-export default Pagination;

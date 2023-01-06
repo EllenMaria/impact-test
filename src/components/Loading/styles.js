@@ -1,5 +1,12 @@
 import styled from "styled-components";
 
+export const LoaderWrapper = styled.div`
+  display: grid;
+  min-height: 90vh;
+  place-content: center;
+  place-items: center;
+`;
+
 export const Loader = styled.div`
   width: 40px;
   height: 40px;

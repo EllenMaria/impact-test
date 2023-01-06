@@ -2,7 +2,7 @@ import { SelectInput, Option, SelectWrapper } from "./styles";
 import P from "prop-types";
 import "./styles.css";
 
-const Select = ({
+export const Select = ({
   updateFilterValue,
   filterData,
   dataName,
@@ -42,5 +42,3 @@ Select.propTypes = {
   filterName: P.array,
   borderColor: P.string,
 };
-
-export default Select;

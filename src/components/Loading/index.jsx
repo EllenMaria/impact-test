@@ -1,7 +1,9 @@
-import { Loader } from "./styles";
+import { Loader, LoaderWrapper } from "./styles";
 
-const Loading = () => {
-  return <Loader></Loader>;
+export const Loading = () => {
+  return (
+    <LoaderWrapper>
+      <Loader></Loader>
+    </LoaderWrapper>
+  );
 };
-
-export default Loading;

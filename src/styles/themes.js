@@ -1,13 +1,22 @@
+import { blue, neutral, yellow, green, red } from "./colors";
+import { primaryFont } from "./typography";
+
 export const theme = {
   colors: {
-    primaryColor: "#252629",
-    secondaryColor: "#535760",
-    accentColor: "#FFC500",
-    lightColor: "#FFFFFF",
-    darkColor: "#303236",
+    yellowColor: yellow[100],
+    blueColor: blue[100],
+    redColor: red[100],
+    greenColor: green[100],
+
+    primaryDarkColor: neutral[600],
+    secondaryDarkColor: neutral[500],
+
+    whiteColor: neutral[100],
+    lightColor: neutral[200],
+    primaryLightColor: neutral[300],
+    secondaryLightColor: neutral[400],
   },
   fonts: {
-    primaryFont: "Cabin, sans-serif",
+    primaryFont: primaryFont,
   },
-  spacintgs: {},
 };

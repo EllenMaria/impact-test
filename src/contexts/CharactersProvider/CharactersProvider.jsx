@@ -23,7 +23,7 @@ export const CharactersProvider = ({ children }) => {
     dispatch({ type: types.CLEAR_SEARCH });
   };
 
-  const isMounted = useRef(false);
+  const isMounted = useRef(true);
 
   useEffect(() => {
     loadData(dispatch).then((dispatch) => {

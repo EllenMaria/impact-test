@@ -6,19 +6,20 @@ export const reducer = (state, action) => {
       return { ...state, characters: action.payload, loading: false };
     }
     case types.DATA_LOADING: {
+      console.log(state);
       return { ...state, loading: true };
     }
     case types.API_ERROR: {
       return { ...state, loading: false, isFilmLoading: false, error: true };
     }
     case types.FILMS_SUCCESS: {
-      return { ...state, filmsData: action.payload, isFilmLoading: false };
+      return { ...state, filmsData: action.payload, loading: false };
     }
     case types.FILMS_LOADING: {
-      return { ...state, isFilmLoading: true };
+      return { ...state, loading: true };
     }
     case types.FILMS_ERROR: {
-      return { ...state, isFilmLoading: false, error: true };
+      return { ...state, loading: false, error: true };
     }
     case types.SPECIES_SUCCESS: {
       return { ...state, speciesData: action.payload };

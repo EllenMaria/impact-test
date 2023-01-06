@@ -1,11 +1,5 @@
 import styled from "styled-components";
-
-export const Cards = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(auto, 260px));
-  gap: 5em;
-  place-content: center;
-`;
+import { motion } from "framer-motion";
 
 export const HeaderCard = styled.header`
 `;
@@ -30,7 +24,7 @@ export const SeeMoreButton = styled.button`
   transition: 0.3s ease-out;
   `;
 
-export const CardContainer = styled.div`
+export const CardContainer = styled(motion.div)`
     background-color: #252629;
     border: 1px solid white;
     cursor: pointer;
@@ -40,7 +34,7 @@ export const CardContainer = styled.div`
     border-radius: 10px;
     margin: 0 auto;
     position: relative;
-    transition:  0.5s ease-out;
+    /* transition: 0.5s ease-out; */
     overflow: visible;
 
     &:hover {
@@ -55,7 +49,7 @@ export const CardContainer = styled.div`
     }
   `;
 
-export const CardBox = styled.div`
+export const CardBox = styled(motion.div)`
   min-height: 20em;
   display: flex;
   flex-direction: column;
@@ -128,12 +122,4 @@ export const MoreInfoBox = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-`;
-
-export const SelectContainer = styled.div`
-  display: flex;
-  gap: 1em;
-  padding: 1em 0;
-  align-items: center;
-  color: #C4C8CA;
 `;

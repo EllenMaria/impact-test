@@ -1,68 +1,143 @@
-import React, { useEffect, useRef } from "react";
-import { useState } from "react";
+import { useState, useCallback } from "react";
+import { useDataContext } from "../../contexts/CharactersProvider/CharactersProvider";
+import { useFilterContext } from "../../contexts/FilterProvider/FilterProvider";
 
-const useFetch = (url, options) => {
-  const [result, setResult] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const urlRef = useRef(url);
-  const optionsRef = useRef(options);
+import { Card, Loading, Pagination, Search, Select } from "../../components";
 
-  useEffect(() => {
-    if (url !== urlRef.current) {
-      urlRef.current = url;
-    }
-  }, [url, options]);
+import { Cards, ClearButton, SelectContainer } from "./styles";
+import { Heading } from "../../components/Heading/styles";
+// import { Loader } from "../../components/Loading/styles";
+// import { motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 
-  useEffect(() => {
-    setLoading(true);
+const Characters = () => {
+  const {
+    loading,
+    isFilmLoading,
+    searchCharacters,
+    clearSearch,
+    filmsData,
+    speciesData,
+  } = useDataContext();
+  const [query, setQuery] = useState("");
 
-    const fetchData = async () => {
-      try {
-        const response = await fetch(urlRef.current, optionsRef.current);
-        const jsonResult = await response.json();
-        setResult(jsonResult);
-        setLoading(false);
-      } catch (e) {
-        setLoading(false);
-        throw e;
-      }
-    };
-    fetchData();
-  }, []);
+  const { filter_character, clearFilters, updateFilterValue, all_characters } =
+    useFilterContext();
 
-  return [result, loading];
-};
+  const getUniqueData = (data, attr) => {
+    let newVal = data.map((curElem) => {
+      return curElem[attr];
+    });
 
-const Home = () => {
-  const [id, setId] = useState("");
-  const [result, loading] = useFetch("https://swapi.dev/api/people/" + id);
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
-  const handleClick = (id) => {
-    setId(id);
-    console.log("ID", id);
+    return [`all`, ...new Set(newVal)];
   };
 
-  if (!loading && result) {
-    return (
-      <div>
-        {result &&
-          result.results.map((character, index) => (
-            <div key={index + 1} onClick={() => handleClick(index + 1)}>
-              <p>
-                {index + 1}
-                {character.name}
-              </p>
-            </div>
-          ))}
-      </div>
-    );
+  const genderData = getUniqueData(all_characters, "gender");
+  const filmData = getUniqueData(filmsData, "url");
+  const specieData = getUniqueData(speciesData, "url");
+
+  const handleChange = useCallback((e) => {
+    const { value } = e.target;
+    setQuery(value);
+    if (query !== "") {
+      searchCharacters(query);
+    } else {
+      clearSearch();
+    }
+  }, []);
+
+  const [perPage] = useState(9);
+  const [currentPage, setCurrentPage] = useState(1);
+  const indexOfLastCharacter = currentPage * perPage;
+  const indexOfFirstCharacter = indexOfLastCharacter - perPage;
+
+  const visibleCharacter = filter_character.slice(
+    indexOfFirstCharacter,
+    indexOfLastCharacter,
+  );
+
+  const filtered = query
+    ? filter_character.filter((item) => {
+        return item.name.toLowerCase().includes(query.toLowerCase());
+      })
+    : visibleCharacter;
+
+  if (loading && isFilmLoading) {
+    return <Loading></Loading>;
   }
 
-  return <div>Home</div>;
+  return (
+    <div>
+      <Heading
+        level={1}
+        color="yellowColor"
+        fontSize="header2"
+        align="center"
+        weight="700"
+        textTransform="uppercase"
+      >
+        Characters
+      </Heading>
+
+      <Search handleChange={handleChange} search={query} />
+
+      <SelectContainer>
+        <p>Filter by</p>
+
+        <Select
+          updateFilterValue={updateFilterValue}
+          filterData={genderData}
+          dataName="genders"
+          borderColor={"#FF8989"}
+        />
+
+        <Select
+          updateFilterValue={updateFilterValue}
+          filterData={filmData}
+          filterName={filmsData}
+          dataName="films"
+          borderColor={"#45C1FF"}
+        />
+
+        <Select
+          updateFilterValue={updateFilterValue}
+          filterData={specieData}
+          filterName={speciesData}
+          dataName="species"
+          borderColor={"#57FF86"}
+        />
+      </SelectContainer>
+
+      <ClearButton onClick={clearFilters}>Clear Filters</ClearButton>
+
+      <div>
+        {!query && (
+          <Heading level={5} color="secondaryLightColor">
+            Showing {visibleCharacter.length} of {filter_character.length}{" "}
+            characters
+          </Heading>
+        )}
+      </div>
+
+      <Cards>
+        <AnimatePresence>
+          {filtered.map((character) => (
+            <Card key={character.name} character={character} query={query} />
+          ))}
+          {filtered.length === 0 && <p>Tem nada aqui vai circulando!</p>}
+        </AnimatePresence>
+      </Cards>
+      <div>
+        {!query && (
+          <Pagination
+            perPage={perPage}
+            setCurrentPage={setCurrentPage}
+            currentPage={currentPage}
+          />
+        )}
+      </div>
+    </div>
+  );
 };
 
-export default Home;
+export default Characters;

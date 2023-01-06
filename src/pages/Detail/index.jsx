@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
-import { useDataContext } from "../contexts/CharactersProvider/CharactersProvider";
-import { makeSlug } from "../helpers/make-slug";
-import GoBack from "../components/GoBack";
+import { useDataContext } from "../../contexts/CharactersProvider/CharactersProvider";
+import { makeSlug } from "../../helpers/make-slug";
+import { GoBack } from "../../components";
 
 const DetailPage = () => {
   const { characters, filmsData, starshipsData, vehiclesData } =

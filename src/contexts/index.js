@@ -1,2 +1,2 @@
-export * from "./CharactersProvider";
-export * from "./FilterProvider";
+export * from "./CharactersProvider/CharactersProvider";
+export * from "./FilterProvider/FilterProvider";

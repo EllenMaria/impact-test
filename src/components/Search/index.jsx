@@ -2,7 +2,7 @@ import { InputSearch } from "./styles";
 import P from "prop-types";
 import "./styles.css";
 
-const Search = ({ search, handleChange }) => {
+export const Search = ({ search, handleChange }) => {
   return (
     <div className="group">
       <svg className="icon" aria-hidden="true" viewBox="0 0 24 24">
@@ -24,5 +24,3 @@ Search.propTypes = {
   search: P.string,
   handleChange: P.func,
 };
-
-export default Search;
