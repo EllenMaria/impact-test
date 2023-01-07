@@ -10,7 +10,7 @@ import { AnimatePresence } from "framer-motion";
 import BackToTopButton from "../../components/BackToTop";
 import { Illustrations } from "../../assets";
 
-const Characters = () => {
+const Home = () => {
   const { loading, searchCharacters, clearSearch, filmsData, speciesData } =
     useDataContext();
   const [query, setQuery] = useState("");
@@ -43,7 +43,7 @@ const Characters = () => {
     [clearSearch, query, searchCharacters],
   );
 
-  const [perPage] = useState(18);
+  const [perPage] = useState(15);
   const [currentPage, setCurrentPage] = useState(1);
   const indexOfLastCharacter = currentPage * perPage;
   const indexOfFirstCharacter = indexOfLastCharacter - perPage;
@@ -127,12 +127,12 @@ const Characters = () => {
           {filtered.map((character) => (
             <Card key={character.name} character={character} query={query} />
           ))}
-          {filtered.length === 0 && <Loading></Loading>}
+          {filtered.length === 0 && <p>Nada</p>}
         </AnimatePresence>
       </Cards>
       <BackToTopButton />
       <div>
-        {!query && (
+        {!query && filter_character !== 0 && (
           <Pagination
             perPage={perPage}
             setCurrentPage={setCurrentPage}
@@ -144,4 +144,4 @@ const Characters = () => {
   );
 };
 
-export default Characters;
+export default Home;

@@ -12,12 +12,12 @@ export const Select = ({
   return (
     <SelectWrapper onClick={updateFilterValue}>
       <SelectInput name={dataName} cor={borderColor}>
-        {filterData.map((curElem, index) => {
+        {filterData.map((curElem) => {
           return (
             <Option
               cor={borderColor}
               checkedColor={borderColor}
-              key={index}
+              key={curElem}
               value={curElem}
             >
               {curElem === "all"
