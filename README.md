@@ -1,4 +1,4 @@
-# Star Wars Characters
+# [ SWAPI ] Star Wars Characters
 > Repository of the frontend project from Jedi Program (Impact Plataform)
 
 ### About
