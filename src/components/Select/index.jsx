@@ -10,7 +10,7 @@ export const Select = ({
   borderColor,
 }) => {
   return (
-    <SelectWrapper onClick={updateFilterValue}>
+    <SelectWrapper onChange={updateFilterValue}>
       <SelectInput name={dataName} cor={borderColor}>
         {filterData.map((curElem) => {
           return (
