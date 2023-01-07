@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/EllenMaria/impact-test/static/css/main.ee745ae2.css",
+    "main.js": "/EllenMaria/impact-test/static/js/main.171e0b8d.js",
+    "static/media/DarthVader.svg": "/EllenMaria/impact-test/static/media/DarthVader.60dfacfe69c7484d41c45213082dd89e.svg",
+    "static/media/StarWars.svg": "/EllenMaria/impact-test/static/media/StarWars.f252a6985d09babe771ba745fbc2eebf.svg",
+    "index.html": "/EllenMaria/impact-test/index.html",
+    "static/media/filter.svg": "/EllenMaria/impact-test/static/media/filter.10466c950c3a15c033b754e46037f818.svg",
+    "main.ee745ae2.css.map": "/EllenMaria/impact-test/static/css/main.ee745ae2.css.map",
+    "main.171e0b8d.js.map": "/EllenMaria/impact-test/static/js/main.171e0b8d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ee745ae2.css",
+    "static/js/main.171e0b8d.js"
+  ]
+}
