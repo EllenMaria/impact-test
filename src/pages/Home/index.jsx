@@ -8,6 +8,7 @@ import { Cards, ClearButton, SelectContainer } from "./styles";
 import { Heading } from "../../components/Heading/styles";
 import { AnimatePresence } from "framer-motion";
 import BackToTopButton from "../../components/BackToTop";
+import { Illustrations } from "../../assets";
 
 const Characters = () => {
   const { loading, searchCharacters, clearSearch, filmsData, speciesData } =
@@ -69,6 +70,7 @@ const Characters = () => {
 
   return (
     <div>
+      <img src={Illustrations.DarthVader} alt="DarthVader" />
       <Heading
         level={1}
         color="yellowColor"

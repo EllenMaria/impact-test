@@ -30,7 +30,7 @@ const filmColor = (episode) => {
   if (episode === 7) return "#a287628d";
 };
 
-export const Card = ({ character, query }) => {
+export const Card = ({ character }) => {
   const { filmsData, speciesData } = useDataContext();
   const [showMoreInfo, setShowMoreInfo] = useState(false);
 
@@ -42,28 +42,12 @@ export const Card = ({ character, query }) => {
     [showMoreInfo],
   );
 
-  let boxVariants = {};
-  if (!query) {
-    boxVariants = {
-      layout: {
-        opacity: 1,
-      },
-      initial: {
-        opacity: 0,
-      },
-      exit: {
-        opacity: 0,
-      },
-    };
-  }
-
   return (
     <CardContainer
-      variants={boxVariants}
       layout
-      // animate={{ opacity: 1 }}
-      // initial={{ opacity: 0 }}
-      // exit={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      initial={{ opacity: 0 }}
+      exit={{ opacity: 0 }}
       onClick={handleMoreInfo}
     >
       <CardBox layout>

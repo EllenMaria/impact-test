@@ -1,6 +1,8 @@
 import React from "react";
 import { GoBack } from "../../components";
 import { Heading } from "../../components/Heading/styles";
+import { theme } from "../../styles/themes";
+import { GlobalStyles } from "../../styles";
 
 const PageNotFound = () => {
   return (
@@ -12,6 +14,7 @@ const PageNotFound = () => {
         This is not the web page you are looking for.
       </Heading>
       <GoBack />
+      <GlobalStyles backgroundColor={`${theme.colors.lightColor}`} />
     </>
   );
 };
